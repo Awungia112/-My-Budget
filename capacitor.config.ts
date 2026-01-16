@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'My Budget',
   webDir: 'dist',
   ios: {
-    deploymentTarget: '14.0'
+    deploymentTarget: '15.0'
   }
 };
 
