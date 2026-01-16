@@ -14,10 +14,11 @@ jobs:
       - name: Trigger Codemagic Build
         run: |
           response=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X POST \
-            https://api.codemagic.io/apps/${{ secrets.CODEMAGIC_APP_ID }}/builds \
+            https://api.codemagic.io/builds \
             -H "Content-Type: application/json" \
             -H "x-auth-token: ${{ secrets.CODEMAGIC_API_TOKEN }}" \
             -d '{
+              "appId": "${{ secrets.CODEMAGIC_APP_ID }}",
               "workflowId": "ios-workflow",
               "branch": "main"
             }')
