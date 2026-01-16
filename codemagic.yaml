@@ -1,6 +1,12 @@
 workflows:
   ios-workflow:
     name: iOS Build
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "main"
+          include: true
     environment:
       xcode: latest
       cocoapods: default
