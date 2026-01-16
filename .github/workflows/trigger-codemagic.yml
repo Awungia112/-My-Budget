@@ -1,32 +1,13 @@
-name: Trigger Codemagic iOS Build
+name: Codemagic Trigger Check
 
 on:
   push:
     branches:
       - main
-  release:
-    types: [published]
 
 jobs:
-  trigger-codemagic:
+  check-trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Codemagic Build
-        run: |
-          response=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X POST \
-            https://api.codemagic.io/builds \
-            -H "Content-Type: application/json" \
-            -H "x-auth-token: ${{ secrets.CODEMAGIC_API_TOKEN }}" \
-            -d '{
-              "appId": "${{ secrets.CODEMAGIC_APP_ID }}",
-              "workflowId": "ios-workflow",
-              "branch": "main"
-            }')
-          echo "API Response:"
-          echo "$response"
-          if echo "$response" | grep -q "HTTP_STATUS:200"; then
-            echo "✅ Codemagic build triggered successfully"
-          else
-            echo "❌ Failed to trigger Codemagic build"
-            exit 1
-          fi
+      - name: Confirm Webhook Trigger
+        run: echo "Build should be triggered via GitHub webhook to Codemagic"
